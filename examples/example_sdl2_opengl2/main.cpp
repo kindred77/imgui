@@ -58,6 +58,15 @@ int main(int, char**)
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
 
+    ImVector<ImWchar> ranges;
+    ImFontGlyphRangesBuilder builder;
+    //builder.AddText(u8"你好世界");                        // Add a string (here "Hello world" contains 7 unique characters)
+    //builder.AddText(u8"这是一个非常有用的文本框");
+    //builder.AddChar(0x7262);                               // Add a specific character
+    builder.AddRanges(io.Fonts->GetGlyphRangesChineseFull()); // Add one of the default ranges
+    builder.BuildRanges(&ranges);
+    io.Fonts->AddFontFromFileTTF("SIMLI.TTF", 14.0f, nullptr, ranges.Data);
+
     // Setup Dear ImGui style
     ImGui::StyleColorsDark();
     //ImGui::StyleColorsLight();
@@ -120,7 +129,7 @@ int main(int, char**)
             static float f = 0.0f;
             static int counter = 0;
 
-            ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.
+            ImGui::Begin("你好世界!");                          // Create a window called "Hello, world!" and append into it.
 
             ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
             ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
